@@ -1,3 +1,5 @@
+# code adapted from generative-query-network-pytorch Github repository created by Jesper Wohlert
+
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -55,9 +57,7 @@ else:
 # Load data
 train_images = []
 train_labels = []
-test_images = []
-test_labels = []
-for scene_id in range(10):
+for scene_id in range(30):
 	print("Loading scene " + str(scene_id))
 	x, v = next(iter(loader))
 	x_, v_ = x.squeeze(0), v.squeeze(0)
@@ -84,8 +84,6 @@ for scene_id in range(10):
 		train_labels.append(n_context)
 train_images = np.array(train_images)
 train_labels = np.array(train_labels)
-# test_images = np.array(test_images)
-# test_labels = np.array(test_labels)
 
 
 # classification
@@ -103,7 +101,7 @@ model.compile(optimizer='adam',
               metrics=['accuracy'])
 
 print("training and validation image classification")
-train_history = model.fit(train_images, train_labels, validation_split=0.2, epochs=10)
+train_history = model.fit(train_images, train_labels, validation_split=0.2, epochs=100)
 print(train_history.history.keys())
 # summarize history for accuracy
 plt.figure()
